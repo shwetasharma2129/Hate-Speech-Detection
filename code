@@ -1,0 +1,68 @@
+import pandas as pd
+Import numpy as np
+dataset = pd.read_csv(“twitter.csv”)
+print(dataset)
+dataset.isnull().sum()
+dataset.info()
+dataset.describe()
+dataset[“labels”]=dataset[“class”].map({0:”Hate speech”, 1: “offensive
+language”,2: “No hate or offensive language”})
+data= dataset[[ “tweet”, “labels”]]
+import re
+import nltk
+from ntlk.cprpus import stopswords
+stopwords=set(stopwords.words(“English”))
+// import stemming
+Stemmer=ntlk.snowballstemmer(“English”)
+//data cleaning
+def clean_data(text);
+text=str(text).lower()
+text=re.sub(“https?:// \ s + www \. s +”, “ ’’, text)
+text=re.sub(“\[.*?\]”, , “ ’’ , text)
+text=re.sub(“[%s]” %re.escape(string.punctuation, , “ ’’, text))
+
+text=re.sub(“\n”, , “ ’’ , text)
+text=re.sub(“\w* \d \w*”, , “ ’’ , text)
+// stop words removal
+text=[word for word in text.split(“ ”) if word not in stopwords]
+text=“ ’’.join(text)
+
+//stemming the text
+Text= [stemmer.stem(word) for word in text.split(“ ”))]
+text=“ ’’.join(text)
+return text
+data[“tweet”]=data[“tweet”].apply(clean_data)
+print(data)
+X=np.array(data[“tweet”])
+Y=np.array(data[“labels”])
+print(X)
+from sklearn.feature_extraction.text import count vectorizer
+from sklearn.model_selection import train_test_split
+cv=countvectorizer()
+X=cv.fit_transform(X)
+Print(X)
+x_train, x_test, y_train, y_test =train_test_split(X,Y, test_size-0.33,
+random_state-42)
+Print(x_train)
+//Building our ML model
+from sklearn, tree import DecisionTreeClassifier
+dt= DecisionTreeClassifier()
+dt.fir(x_train,y_train)
+y_pred=dt.predict(x_test)
+
+// confusion matrix and accuracy
+From sklearn.metrics import confusion_matrix
+cm=confusion_matrix(y_test,y_pred)
+print(cm)
+import seaborn as sns
+import matplotlib.pyplot as ply
+% matplotlib inline
+Sns.heatmap(cn, cnnot=True, fmt=“ .1f’’, emap=“ YIGnbu’’)
+From sklearn.metrics import accuracy_score
+accuracy_score(y_test,y_pred)
+sample=“ Let’s unite and kill all the people who are protesting against the
+government”
+sample=clean_data(sample)
+print(sample)
+data1=cv.transform([sample]).to array()
+dt.predict(data1)
